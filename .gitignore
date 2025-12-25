@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Research & Planning Documents (User requested to ignore)
+analysis_plan.md
+연구_계획.md
+
+# System
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

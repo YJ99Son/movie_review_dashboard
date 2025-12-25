@@ -1,99 +1,94 @@
-# 영화 리뷰 크로스 어텐션 시각화 대시보드
+# 🎬 Cross-Domain Attention Analytics Dashboard
 
-## 프로젝트 개요
+### Natural Language Processing – Portfolio Project
 
-이 프로젝트는 영화 리뷰와 영화 정보/설명 간의 크로스 어텐션(cross-attention)을 시각화하는 대시보드를 제공합니다. 사전훈련된 한국어 트랜스포머 모델(KLUE-RoBERTa)을 활용하여 리뷰 텍스트가 영화 정보 및 줄거리의 어떤 부분에 주의를 기울이는지 분석할 수 있습니다.
+**Visualizing Cross-Attention between User Reviews and Metadata in Movies & Sports**
 
-## 주요 기능
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/transformers-4.19.0-yellow?logo=huggingface&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)
 
-1. **리뷰-영화 정보 어텐션 히트맵**: 리뷰(y축)가 영화 정보(x축)의 어떤 부분에 주목하는지 시각화
-2. **리뷰-영화 줄거리 어텐션 히트맵**: 리뷰(y축)가 영화 줄거리/설명(x축)의 어떤 부분에 주목하는지 시각화
-3. **집계 어텐션 시각화**: 모든 리뷰의 어텐션을 합쳐서 정보/줄거리의 어느 부분이 가장 주목받는지 분석
+이 프로젝트는 사전 학습된 트랜스포머 모델(KLUE-RoBERTa 등)의 **Cross-Attention 메커니즘**을 활용하여, 사용자의 **리뷰(Review)나 댓글(Comment)**이 대상 콘텐츠의 **어떤 정보(Metadata/Context)**에 주목하고 있는지를 시각적으로 분석하는 대시보드입니다.
 
-## 설치 방법
+초기에는 영화 리뷰 분석을 위해 개발되었으나, 현재는 **스포츠(축구) 등 다양한 도메인으로 확장**하여 팬들의 열광 요소와 관심사를 분석하는 데 적용하고 있습니다.
+
+---
+
+---
+
+## 📊 주요 기능 (Key Features)
+
+### 1. 영화 리뷰 분석 (Movie Review Analytics)
+
+사용자가 작성한 영화 리뷰가 영화의 줄거리, 감독, 배우 등 구체적인 정보 중 어디에 집중하는지 분석합니다.
+
+- **기능**: 리뷰 텍스트와 영화 메타데이터 간의 어텐션 히트맵 시각화, 리뷰 클러스터링(PCA).
+- **활용**: 관객이 영화의 어떤 요소(스토리, 연기, 연출 등)에 반응하는지 파악.
+
+<div align="center">
+  <img src="docs/user_dashboard_3.png" width="100%" alt="Review Attention Heatmap" />
+  <p><em>Fig 1. Movie Review Attention Heatmap</em></p>
+  <img src="docs/user_dashboard_2.png" width="100%" alt="Review Cluster Analysis" />
+  <p><em>Fig 2. Review Cluster Analysis (PCA)</em></p>
+</div>
+
+### 2. 스포츠 도메인 확장: 축구 팬 열광 요소 분석 (Football Fan Engagement)
+
+영화 도메인에서 검증된 기술을 스포츠 분야에 적용하여, 경기 후 댓글이 특정 선수나 경기 상황(키워드)에 어떻게 반응하는지 분석합니다.
+
+- **확장성**: 영화뿐만 아니라 즉각적인 반응이 중요한 스포츠 이벤트에서도 텍스트가 가리키는 대상(Target Entity)을 정확히 포착합니다.
+- **Deep Dive**: "player", "goal"등 핵심 키워드에 대한 팬들의 주목도를 히트맵으로 시각화하여 **'스포츠 열광 요소'**를 도출합니다.
+
+<div align="center">
+  <img src="docs/user_dashboard_1.png" width="100%" alt="Football Attention Analysis" />
+  <p><em>Fig 3. Football Fan Attention Dashboard</em></p>
+</div>
+
+---
+
+## 🛠 기술 스택 (Tech Stack)
+
+- **Model**: KLUE-RoBERTa (Pre-trained Korean Language Model), Cross-Attention Extraction
+- **Analysis**: PyTorch, Hugging Face Transformers, Scikit-learn (PCA, Clustering)
+- **Visualization**: D3.js, Chart.js (Interactive HTML Reports)
+
+## 🚀 설치 및 실행 (Installation & Usage)
 
 ### 필수 요구사항
 
-- Python 3.9 이상
-- CUDA 지원 GPU (권장, CPU에서도 실행 가능)
+- Python 3.9+
+- CUDA GPU (권장)
 
-### 설치 단계
+### 설치
 
-1. 저장소 클론
-   ```bash
-   git clone https://github.com/yourusername/movie-attention-dashboard.git
-   cd movie-attention-dashboard
-   ```
+```bash
+git clone https://github.com/yourusername/movie-review-dashboard.git
+cd movie-review-dashboard
+pip install -r requirements.txt
+```
 
-2. 가상환경 생성 (선택사항)
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate     # Windows
-   ```
+### 실행
 
-3. 필요 패키지 설치
-   ```bash
-   pip install -r requirements.txt
-   ```
+이 프로젝트는 Jupyter Notebook을 통해 분석을 수행하고, 결과물을 인터랙티브 HTML 대시보드로 생성합니다.
 
-4. KoNLPy 설치를 위한 추가 요구사항
-   - Java 8 이상 설치 필요
-   - Mac: `brew install jpype`
-   - Ubuntu: `sudo apt-get install openjdk-8-jdk python3-dev`
-   - Windows: JDK 설치 후 환경변수 설정
+1. **데이터 분석 및 대시보드 생성**:
+   `pretrained_crossattention.ipynb` 노트북을 실행하여 모델 로드, 어텐션 분석 수행 및 HTML 리포트를 생성합니다.
+2. **대시보드 확인**:
+   생성된 HTML 파일을 브라우저에서 열어 결과를 확인합니다.
 
-## 사용 방법
+   - **영화 분석**: `enhanced_dashboard.html`
+   - **축구/스포츠 분석**: `football_attention_dashboard.html`
 
-1. 애플리케이션 실행
-   ```bash
-   streamlit run cross_attention_dashboard.py
-   ```
+## 📂 프로젝트 구조
 
-2. 웹 브라우저에서 열리는 대시보드 사용
-   - 영화 ID 입력
-   - "데이터 로드" 버튼 클릭
-   - 표시된 리뷰 중 하나 선택
-   - "어텐션 시각화" 버튼 클릭하여 히트맵 확인
-   - 여러 리뷰에 대해 반복 후 "모든 리뷰 어텐션 집계" 버튼 클릭
+- `movie_data/`: 영화 메타데이터 및 전처리된 리뷰 데이터
+- `docs/`: 대시보드 스크린샷 및 문서 리소스
+- `*.html`: 인터랙티브 분석 결과 리포트
+- `*.ipynb`: 어텐션 추출 및 모델 분석 노트북
 
-## 데이터 구조
+---
 
-프로젝트는 다음과 같은 데이터 파일 구조를 사용합니다:
-
-- `movie_data/`: 영화 정보가 저장된 디렉토리
-  - `movie_summary.json`: 영화 ID별 줄거리 정보
-  - `{movie_id}_info.json`: 영화 정보 (제목, 장르, 감독, 배우 등)
-  - `{movie_id}_reviews.json`: 해당 영화의 리뷰 목록
-
-## 모델 설명
-
-이 프로젝트는 KLUE-RoBERTa-base 모델을 사용하여 어텐션 분석을 수행합니다. 이 모델은 한국어 자연어 처리에 최적화된 사전훈련된 트랜스포머 모델로, Hugging Face 라이브러리를 통해 로드됩니다.
-
-## 문제 해결
-
-- **Mecab 로드 오류**: KoNLPy/Mecab 설치 문제 발생 시 다음과 같이 확인
-  ```bash
-  pip install konlpy
-  pip install jpype1
-  ```
-  필요 시 Java 환경 변수를 올바르게 설정했는지 확인
-
-- **GPU 메모리 부족**: `compute_cross_attention` 함수에서 batch_size와 max_length 값 조정
-
-## 향후 개발 계획
-
-- 다양한 사전훈련 모델 옵션 제공
-- 어텐션 헤드/레이어 선택 기능 추가
-- 감성 분석과 어텐션 결과 통합
-- 대시보드 UI/UX 개선
-
-## 기여 방법
-
-1. 이슈 등록 또는 풀 리퀘스트 생성
-2. 코드 개선 및 버그 수정 제안
-3. 새로운 기능 아이디어 공유
-
-## 라이센스
-
-이 프로젝트는 MIT 라이센스를 따릅니다. 자세한 내용은 LICENSE 파일을 참조하세요. 
+© 2025 Youngjin Son. All Rights Reserved.
